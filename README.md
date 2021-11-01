@@ -19,8 +19,16 @@ There is an issue with file permissions if you are using Windows. Follow these [
 ## Getting started
 
 1. Clone this repository
-2. From the repository root, run `docker-compose up -d` to start the containers
-3. Create a dmaster demo site with `docker-compose exec -u buildkit civicrm civibuild create dmaster`
+2. In repository root, change ownership of the build directory to match the user
+   you will be running the rest of the command as:
+
+   ```sh
+   chown username:usergroup build/
+   ```
+
+   See <https://github.com/michaelmcandrew/civicrm-buildkit-docker/issues/63>
+3. From the repository root, run `docker-compose up -d` to start the containers
+4. Create a dmaster demo site with `docker-compose exec -u buildkit civicrm civibuild create dmaster`
 
     * The build will run for some time.  If successful, it will conclude with output similar to the following:
 
@@ -39,7 +47,7 @@ There is an issue with file permissions if you are using Windows. Follow these [
     * Make note of the admin and demo credentials for future use. These credentials may also be found in the build directory, e.g. the credentials for `dmaster` are in `build/dmaster.sh`.
     * For more help with civibuild's create command, see the [buildkit documentation](https://docs.civicrm.org/dev/en/latest/tools/civibuild/)
 
-4. Navigate to your new CiviCRM development site at <http://dmaster.localhost:7979>
+5. Navigate to your new CiviCRM development site at <http://dmaster.localhost:7979>
 
 Note: for less surprises, consider using a [stable release](https://github.com/michaelmcandrew/civicrm-buildkit-docker/releases).
 
@@ -91,12 +99,13 @@ alias bkc='docker-compose --file $HOME/civicrm-buildkit-docker/docker-compose.ym
 alias bkb='docker-compose --file $HOME/civicrm-buildkit-docker/docker-compose.yml exec -u buildkit civicrm bash'
 alias bk='docker-compose --file $HOME/civicrm-buildkit-docker/docker-compose.yml'
 ```
+
 You can then:
 
-- bring up the containers with `bku`
-- run build and admin tools with `bkc`, for example `bkc civibuild create dmaster`.
-- start bash in the civicrm container with `bkb`.
-- run any other docker compose command with `bk`, e.g. `bk down`
+* bring up the containers with `bku`
+* run build and admin tools with `bkc`, for example `bkc civibuild create dmaster`.
+* start bash in the civicrm container with `bkb`.
+* run any other docker compose command with `bk`, e.g. `bk down`
 
 **Note**: the above aliases assume you have downloaded this repo to `$HOME/civicrm-buildkit-docker`. Please adjust as appropriate if you have downloaded it somewhere else.
 
@@ -163,7 +172,7 @@ Contributions to this repository are very welcome. Feel free to submit a pull re
 
 ## See also
 
-* [Publishing Dockerfiles](publish/README.md) for details on how to update the image published on https://hub.docker.com.
+* [Publishing Dockerfiles](publish/README.md) for details on how to update the image published on <https://hub.docker.com>.
 
 ## License
 
