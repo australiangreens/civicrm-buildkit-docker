@@ -20,6 +20,8 @@ services:
       - drush-cache:/buildkit/.drush
       - npm-cache:/buildkit/.npm
       - git-cache:/buildkit/app/tmp/git-cache
+      # CUSTOM: Mount code for authx from elsewhere
+      - ../civicrm-core-fork/ext/authx:/ext/authx
     restart: unless-stopped
   mysql:
     image: mariadb:10.4.21
