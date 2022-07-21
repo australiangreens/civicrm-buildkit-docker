@@ -22,6 +22,8 @@ services:
       - git-cache:/buildkit/app/tmp/git-cache
       # CUSTOM: Mount code for authx from elsewhere
       - ../civicrm-core-fork/ext/authx:/ext/authx
+      # CUSTOM: Mount code for civiauth0jwt from elsewhere
+      - ../civiauth0jwt:/ext/civiauth0jwt
     restart: unless-stopped
   mysql:
     image: mariadb:10.4.21
